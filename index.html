@@ -860,27 +860,26 @@
   ];
   let contacts = store.get("nv_contacts", [{ name: "Priya", phone: "98765 43210", on: true }]);
   let savedRoutes = store.get("nv_routes", []);
-  // ---------- LOADING + MAP TILES ----------
+    // ---------- LOADING + MAP TILES ----------
   const showLoading = t => { $("loadText").textContent = t || "Loading…"; $("loading").classList.add("show"); };
   const hideLoading = () => $("loading").classList.remove("show");
+  // dark map (navigation + other maps): standard OpenStreetMap tiles, darkened with a filter
   function tiles(m) {
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-      { subdomains: "abcd", maxZoom: 19, attribution: "© OpenStreetMap · © CARTO" }).addTo(m);
+    if (!document.getElementById("nvDarkTiles")) {
+      const s = document.createElement("style");
+      s.id = "nvDarkTiles";
+      s.textContent = ".nv-dark-tiles{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9) saturate(.55);}";
+      document.head.appendChild(s);
+    }
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      { maxZoom: 19, className: "nv-dark-tiles", attribution: "© OpenStreetMap" }).addTo(m);
   }
-  // light map (used by "Choose on map"); switches to standard OpenStreetMap if it can't load
+  // light map (used by "Choose on map"): standard OpenStreetMap with street names
   function lightTiles(m) {
-    const main = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-      { subdomains: "abcd", maxZoom: 19, attribution: "© OpenStreetMap · © CARTO" }).addTo(m);
-    let ok = 0, bad = 0, swapped = false;
-    main.on("tileload", () => { ok++; });
-    main.on("tileerror", () => {
-      bad++;
-      if (swapped || ok > 0 || bad < 4) return;
-      swapped = true;
-      m.removeLayer(main);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(m);
-    });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      { maxZoom: 19, attribution: "© OpenStreetMap" }).addTo(m);
   }
+  
   function errMsg(e) {
     const m = e && e.message;
     if (m === "place") return (e.q ? "Couldn't find \"" + e.q.slice(0, 32) + "\". " : "Couldn't find that place. ") + "Pick a suggestion from the list or choose it on the map.";
