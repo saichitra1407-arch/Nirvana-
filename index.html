@@ -86,7 +86,7 @@
   .acit b{display:block;font-size:14.5px;font-weight:600}
   .acit small{display:block;color:var(--muted);font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .acnone{padding:11px 14px;color:var(--muted);font-size:12.5px;line-height:1.4}
-/* JOURNEY */
+  /* JOURNEY */
   .rc{border-left:5px solid var(--line);cursor:pointer}
   .rc.g{border-left-color:var(--g)}
   .rc.y{border-left-color:var(--y)}
@@ -154,7 +154,7 @@
   .pinfo small{color:var(--muted);font-size:14px}
   .startb{border:none;background:var(--teal);color:#06231f;font-weight:700;font-size:20px;padding:16px 26px;border-radius:999px;display:flex;gap:8px;align-items:center;flex:none}
   .startb.end{background:var(--red);color:#fff}
-/* MAP PLACES + MARKERS */
+  /* MAP PLACES + MARKERS */
   .poiwrap{background:none;border:none;overflow:visible}
   .poi{position:absolute;display:flex;align-items:center;gap:6px;transform:translate(-16px,-50%);white-space:nowrap;background:rgba(8,20,36,.92);border-radius:999px;padding:3px 11px 3px 3px;font-size:12.5px;font-weight:600;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.6);cursor:pointer}
   .poi i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:14px;flex:none}
@@ -239,7 +239,7 @@
   .stat3 div{background:#0a1424;border-radius:12px;padding:10px;text-align:center}
   .stat3 b{display:block;font-size:20px;color:var(--teal)}
   .stat3 small{color:var(--muted);font-size:11.5px}
-/* ===== FEATURE 3: EMERGENCY SUPPORT & QUICK HELP ===== */
+  /* ===== FEATURE 3: EMERGENCY SUPPORT & QUICK HELP ===== */
   .fab{position:fixed;right:max(14px,calc(50% - 201px));bottom:calc(88px + env(safe-area-inset-bottom));z-index:12;width:58px;height:58px;border-radius:50%;border:none;background:var(--red);color:#fff;font-weight:800;font-size:15px;letter-spacing:1px;box-shadow:0 4px 16px rgba(0,0,0,.55),0 0 0 4px rgba(207,59,52,.28);display:none}
   .fab.show{display:block}
   .fab.up{bottom:calc(158px + env(safe-area-inset-bottom))}
@@ -337,7 +337,7 @@
   .link:disabled{opacity:.45}
   .tag[data-rr]{cursor:pointer}
   .leaflet-bar a{background:#0b1729;color:#fff;border-bottom-color:var(--line)}
-/* ===== FEATURE 6: PUBLIC FACILITIES & SAFE WAITING FINDER ===== */
+  /* ===== FEATURE 6: PUBLIC FACILITIES & SAFE WAITING FINDER ===== */
   .fmap{height:240px;margin:6px 0 8px}
   .fpin{position:absolute;width:30px;height:30px;transform:translate(-15px,-15px);border-radius:50%;display:grid;place-items:center;font-size:15px;background:#0b1729;border:2px solid var(--teal);box-shadow:0 2px 8px rgba(0,0,0,.6)}
   .fpin.sel{background:var(--teal);box-shadow:0 0 0 3px #fff,0 0 14px var(--teal)}
@@ -523,8 +523,8 @@
   <div id="draftList"></div>
   <h3 class="h2">Recent reports nearby</h3>
   <div id="reportList"></div>
-</div>
-<!-- ================= CONTACTS + COMPANION ================= -->
+      </div>
+      <!-- ================= CONTACTS + COMPANION ================= -->
 <div class="page" id="contacts">
   <h2 class="title">Contacts</h2>
   <p class="sub">Emergency help and people you trust.</p>
@@ -775,7 +775,7 @@
     return m + " month" + (m > 1 ? "s" : "") + " ago";
   };
   const stale = d => age(d) >= 90;   // 3 months or older = outdated
-// ---------- DISTANCE + DIRECTION HELPERS ----------
+  // ---------- DISTANCE + DIRECTION HELPERS ----------
   const hav = (a, b) => {
     const R = 6371000, t = Math.PI / 180, dLa = (b[0] - a[0]) * t, dLo = (b[1] - a[1]) * t;
     const x = Math.sin(dLa / 2) ** 2 + Math.cos(a[0] * t) * Math.cos(b[0] * t) * Math.sin(dLo / 2) ** 2;
@@ -860,7 +860,7 @@
   ];
   let contacts = store.get("nv_contacts", [{ name: "Priya", phone: "98765 43210", on: true }]);
   let savedRoutes = store.get("nv_routes", []);
-// ---------- LOADING + MAP TILES ----------
+  // ---------- LOADING + MAP TILES ----------
   const showLoading = t => { $("loadText").textContent = t || "Loading…"; $("loading").classList.add("show"); };
   const hideLoading = () => $("loading").classList.remove("show");
   function tiles(m) {
@@ -983,7 +983,7 @@
       if (out.some(o => o.name === name && o.sub === s)) return;
       out.push({ name, sub: s, lat: +lat, lng: +lng });
     };
-const photon = async text => {
+  const photon = async text => {
       const j = await fetchJson("https://photon.komoot.io/api/?lang=en&limit=8&lat=" + bias.lat + "&lon=" + bias.lng + "&q=" + encodeURIComponent(text), 8000);
       (j.features || []).forEach(f => {
         const p = f.properties || {}, c = f.geometry.coordinates;
@@ -1116,7 +1116,7 @@ const photon = async text => {
     el.textContent = msg || "";
     el.style.display = msg ? "block" : "none";
   }
-// icon for each kind of place
+  // icon for each kind of place
   function pkEmoji(t) {
     const a = t.amenity || "";
     if (a === "place_of_worship") return t.religion === "muslim" ? "🕌" : t.religion === "christian" ? "⛪" : t.religion === "hindu" ? "🛕" : "🛐";
@@ -1268,7 +1268,7 @@ const photon = async text => {
     clearTimeout(pkTimer);
     pkTimer = setTimeout(pkLookup, 700);
   }
-// asks for the address of the spot under the pin (waits until you stop moving the map)
+  // asks for the address of the spot under the pin (waits until you stop moving the map)
   async function pkLookup() {
     if (!pkMap) return;
     const my = ++pkSeq, c = pkMap.getCenter();
@@ -1441,7 +1441,7 @@ const photon = async text => {
     } catch (e) { toast(errMsg(e)); return false; }
     finally { hideLoading(); }
   }
-// ---------- RENDER: HOME + HELP ----------
+  // ---------- RENDER: HOME + HELP ----------
   function renderHome() {
     const p = helpList().find(x => x.sample ? x.open : true), live = !p.sample;
     $("hName").textContent = p.n + " · " + p.d;
@@ -1546,8 +1546,8 @@ const photon = async text => {
       L.circleMarker(r.coords[r.coords.length - 1], { radius: 7, color: "#fff", weight: 2, fillColor: "#cf3b34", fillOpacity: 1 }).addTo(jLayer);
       if (fit) jMap.fitBounds(L.latLngBounds(routes.flatMap(x => x.coords)), { padding: [24, 24] });
     }, 60);
-  }
-// ---------- PLACES IN THE MAP VIEW ----------
+    }
+  // ---------- PLACES IN THE MAP VIEW ----------
   const poiKinds = ["hospital", "police", "park", "school", "bus"];
   const poiNames = { hospital: "Hospitals", police: "Police stations", park: "Parks", school: "Schools", bus: "Bus stops", home: "Home" };
   const poiOne = { hospital: "Hospital", police: "Police station", park: "Park", school: "School", bus: "Bus stop" };
@@ -1694,7 +1694,7 @@ const photon = async text => {
       try { return await photonBox(box, "bus"); } catch (e2) { return []; }
     }
   }
-function addList(list) {
+  function addList(list) {
     list.forEach(x => {
       if (poiStore.some(p => p.kind === x.kind && (p.id === x.id || (p.name === x.name && hav([p.lat, p.lng], [x.lat, x.lng]) < 60)))) return;
       poiStore.push(x);
@@ -1779,7 +1779,7 @@ function addList(list) {
       `<label><span>${poiNames[k]}</span><input type="checkbox" data-l="${k}" ${layerOn[k] ? "checked" : ""}></label>`).join("") +
       (hasHome ? "" : "<small>Add your home address in Profile to see it here.</small>");
   }
-// ---------- LIVE NAVIGATION ----------
+  // ---------- LIVE NAVIGATION ----------
   const arrows = { "left": "←", "slight left": "↖", "sharp left": "↰", "right": "→", "slight right": "↗", "sharp right": "↱", "uturn": "↶", "straight": "↑" };
   let nMap = null, nLayer = null, nMe = null, nGlow = null, nRem = null, nCore = null, nDone = null, watchId = null;
   let nr = null, cum = [], stepAt = [], follow = false, offCount = 0, arrivedFlag = false, nActive = false, prevPos = null, lastHead = null;
@@ -1978,8 +1978,8 @@ function addList(list) {
     $("navScreen").classList.remove("show");
     $("layerMenu").style.display = "none";
     if (nMe && nMap) { nMap.removeLayer(nMe); nMe = null; }
-  }
-// ================= FEATURE 2: JOURNEY COMPANION (engine) =================
+        }
+  // ================= FEATURE 2: JOURNEY COMPANION (engine) =================
   let comp = store.get("nv_comp", null), compTimer = null, sheetKind = "", devMute = 0, lastMsg = "";
   const tm = () => comp && comp.fast ? { grace: 8, nudge: 8, cancel: 8 } : { grace: 60, nudge: 60, cancel: 15 };
   const saveComp = () => store.set("nv_comp", comp);
@@ -2093,7 +2093,7 @@ function addList(list) {
     comp.fast = true; comp.status = "ok"; comp.nextCheck = Date.now(); saveComp();
     toast("Missed check-in test started");
   }
-// ================= FEATURE 2: JOURNEY COMPANION (screens + messages) =================
+  // ================= FEATURE 2: JOURNEY COMPANION (screens + messages) =================
   function showSheet(html, kind) { sheetKind = kind || ""; $("shBox").innerHTML = html; $("sheet").classList.add("show"); }
   function hideSheet() { $("sheet").classList.remove("show"); sheetKind = ""; }
   function openComp() { $("compScreen").classList.add("show"); renderComp(); }
@@ -2179,7 +2179,7 @@ function addList(list) {
     }
     showSheet(h, "check");
   }
-// ---------- companion screen ----------
+  // ---------- companion screen ----------
   function renderComp() {
     const el = $("compBody");
     if (!el) return;
@@ -2260,7 +2260,7 @@ function addList(list) {
         <button class="btn" data-a="openComp">Open companion</button>`;
     }
   }
-// ================= FEATURE 3: EMERGENCY SUPPORT & QUICK HELP =================
+  // ================= FEATURE 3: EMERGENCY SUPPORT & QUICK HELP =================
   const numbers = [
     { n: "Emergency", t: "112", d: "Police, fire, ambulance", red: true },
     { n: "Police", t: "100", d: "Local police" },
@@ -2424,7 +2424,7 @@ function addList(list) {
     lastMsg = buildMsg("loc");
     showSheet(`<div class="shico">📍</div><h3>Share my location</h3><p>Nothing is sent automatically. Choose who gets your map link.</p><div class="msgbox">${esc(lastMsg)}</div>${sendButtons(lastMsg)}<button class="btn ghost sm" data-a="hide">Close</button>`, "locs");
   }
-// ---------- SOS: hold, 5 second countdown, then active ----------
+  // ---------- SOS: hold, 5 second countdown, then active ----------
   function bindEmg() {
     const b = $("sosBtn"), fill = $("sosFill");
     const holdEnd = () => { cancelAnimationFrame(holdRaf); holdRaf = null; fill.style.strokeDashoffset = 578; };
@@ -2561,7 +2561,7 @@ function addList(list) {
     try { navigator.vibrate && navigator.vibrate(0); } catch (e) {}
     $("fakeScreen").classList.remove("show");
   }
-// ================= FEATURE 4: NIGHT TRANSIT & DISRUPTION PLANNER =================
+  // ================= FEATURE 4: NIGHT TRANSIT & DISRUPTION PLANNER =================
   const T_DELAY = 14;                       // minutes the Metro runs late when "Preview a delay" is on
   // minutes after midnight (23:10 = 1390). Times after midnight count as 1440+.
   const tPlans = [
@@ -2761,8 +2761,8 @@ function addList(list) {
       openNav();
     } catch (e) { toast(errMsg(e)); }
     finally { hideLoading(); }
-  }
-// ================= FEATURE 5: COMMUNITY REPORTS & INFRASTRUCTURE MAP (data + route scoring) =================
+     }
+  // ================= FEATURE 5: COMMUNITY REPORTS & INFRASTRUCTURE MAP (data + route scoring) =================
   const REP_GRID = 0.002;                                    // harassment reports are snapped to about 200 m
   const snap = v => +(Math.round(v / REP_GRID) * REP_GRID).toFixed(4);
   const repFilters = ["All", "Harassment", "Streetlight", "Footpath", "Isolated"];
@@ -2859,7 +2859,7 @@ function addList(list) {
         <div class="grow"><b>${p.type}</b><small class="b">${esc(p.loc)} · ${rAge(p.t)}</small>${rOld(p) ? '<span class="tag warn">⚠ May be outdated</span>' : ""}</div>
         <span class="tag g" data-rr="${p.id}">Map →</span></div>`).join("");
   }
-// ================= FEATURE 5: COMMUNITY MAP, REPORT FORM, VOTES =================
+  // ================= FEATURE 5: COMMUNITY MAP, REPORT FORM, VOTES =================
   const isOffline = () => $("simOffline").checked || !navigator.onLine;
   const postsLeft = () => { rTimes = rTimes.filter(t => Date.now() - t < 36e5); return Math.max(0, POST_LIMIT - rTimes.length); };
   const canPost = () => postsLeft() > 0;
@@ -3002,7 +3002,7 @@ function addList(list) {
     if (gone) rSelId = null;
     renderReports(); drawRMap();
   }
-// ---------- new report ----------
+  // ---------- new report ----------
   function addReport(d) {
     const approx = d.type === "Harassment";
     const r = { id: "m" + Date.now().toString(36) + Math.floor(Math.random() * 1e4), type: d.type, loc: d.loc,
@@ -3130,8 +3130,8 @@ function addList(list) {
     $("offRoutes").innerHTML = `<b>Saved routes</b>` + (savedRoutes.length
       ? savedRoutes.map((r, i) => `<div class="row" style="margin-top:10px"><div class="grow"><small class="b" style="margin:0">${esc(r.n)} (${r.m})</small></div><button class="btn ghost sm" style="width:auto;margin:0;padding:8px 14px" data-open="${i}">Open</button></div>`).join("")
       : `<small class="b">No saved routes yet. Save one from the Journey tab.</small>`);
-  }
-// ================= FEATURE 6: PUBLIC FACILITIES & SAFE WAITING FINDER (data + engine) =================
+          }
+  // ================= FEATURE 6: PUBLIC FACILITIES & SAFE WAITING FINDER (data + engine) =================
   const fKinds = {
     toilet:   { ic: "🚻", n: "Toilets",        chip: "Toilets" },
     water:    { ic: "🚰", n: "Drinking water", chip: "Water" },
@@ -3307,7 +3307,7 @@ function addList(list) {
     renderFac();
     if (fMap) fitFMap();
   }
-// ---------- map ----------
+  // ---------- map ----------
   function initFMap() {
     if (fMap || !window.L) return;
     fMap = L.map("fMap", { attributionControl: false });
@@ -3479,7 +3479,7 @@ function addList(list) {
       if (b) fzIssue(b.dataset.fid, +b.dataset.fi);
     });
   }
-// ================= FEATURE 7: MULTI-STOP PLANNER =================
+  // ================= FEATURE 7: MULTI-STOP PLANNER =================
   const shortName = s => { const t = String(s || "").split(",")[0].trim(); return t.length > 22 ? t.slice(0, 21) + "…" : t; };
 
   // splits one route into legs (stop to stop), each with its own safety score
@@ -3583,8 +3583,8 @@ function addList(list) {
       " km. Expected arrival " + clock(Date.now() + durOf(r) * 1000) + ". Follow my journey: " + locLink();
     if (comp && comp.active) { logEv("Shared the stops plan", "📍"); saveComp(); renderComp(); }
     showSheet(`<div class="shico">📍</div><h3>Share all stops</h3><p>Nothing is sent automatically. Choose who gets it.</p><div class="msgbox">${esc(lastMsg)}</div>${sendButtons(lastMsg)}<button class="btn ghost sm" data-a="hide">Close</button>`, "share");
-  }
-// ================= FEATURE 7: OFFLINE MODE =================
+      }
+  // ================= FEATURE 7: OFFLINE MODE =================
   // saves the current trip (with all its stops) on this phone
   function saveTrip(silent) {
     if (!journey || !routes.length) { if (!silent) toast("Plan a route first"); return false; }
@@ -3670,7 +3670,7 @@ function addList(list) {
       const d = e.target.closest("[data-td]"); if (d) removeTrip(+d.dataset.td);
     });
   }
-// ================= BUTTON WIRING =================
+  // ================= BUTTON WIRING =================
   function act(a) {
     if (a === "openComp") openComp();
     else if (a === "closeComp") closeComp();
